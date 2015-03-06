@@ -18,13 +18,16 @@ if (Meteor.isClient) {
 
     Template.create.rendered = function () {
         startMap();
+        $(document).ready(function(){
+          $('.slider').slick({
+            
+          });
+        });
     };
 
     Template.create.events({
         "click .show-form": function(){
-            alert("cows");
-            $(".slider .active").removeClass("active");
-            $(".form").addClass("active");
+            $('.slider').slickGoTo(1);
         },  
         "submit .new-note": function(event) {
 
@@ -48,14 +51,19 @@ if (Meteor.isClient) {
             console.log("save", data);
 
             var created = Notes.insert(data);
+            console.log('created', created);
             Session.set("createdNote", created);
 
             // Clear form
             $(".note:first").val("");
 
+            $('.slider').slickGoTo(2);
             // Prevent default form submit
             return false;
-        }
+        },
+        "click .done": function(){
+            $('.slider').slickGoTo(0);
+        },  
     });
 
     // Counter as a substitue for lack of promises
@@ -156,7 +164,6 @@ if (Meteor.isClient) {
     }
 
     function storeLocation(location) {
-        console.log("store location", location);
         Session.set("lat", location.coords.latitude);
         Session.set("long", location.coords.longitude);
         window.lat = location.coords.latitude;
@@ -182,7 +189,6 @@ if (Meteor.isClient) {
                         }
                     }
                 });
-                console.log("notes", result);
                 return result;
             } else {
                 return [];
@@ -201,7 +207,6 @@ if (Meteor.isClient) {
                         }
                     }
                 });
-                console.log("nextNote", result);
                 return result;
             } else {
                 return [];
@@ -214,7 +219,7 @@ if (Meteor.isClient) {
             return Session.get("long");
         },
         createdNote: function(){
-            return Session.get("createdNote") ? Session.get("createdNote")._id : "";
+            return Session.get("createdNote") ? Session.get("createdNote") : "";
         }
     });
 

@@ -26,23 +26,24 @@
 <template name="create">
 
     <h1>Geo <a href="/"><i class="fa fa-globe"></i></a> Note</h1> 
-    <ul class="slider">
-        <li class="location active">
+    <div class="slider">
+        <div class="location" data-orbit-slide="1">
             <div id="map"><i class="fa fa-refresh fa-spin"></i> Loading Location</div>
             <div class="panel">{{lat}}, {{long}}</div>
-            <a href="javascript:;" class="button large show-form">Drop Note Here</a>
-        </li>
-        <li class="form">
+            <a href="javascript:;" class="button large show-form" data-orbit-link="2">Drop Note Here</a>
+        </div>
+        <div class="form" data-orbit-slide="2">
             <form class="new-note">
                 <textarea class="note" type="text" name="text" placeholder="Add a note.  Dropping it here means only people that are standing within 10 meteres from this location can read it."></textarea>
                 <button class="save-note button large">Save Note</button>
             </form>
-        </li>
-        <li class="share">
+        </div>
+        <div class="share" data-orbit-slide="3">
             Share Your Note
             <div class="panel">http://geonote.meteor.com/note/{{createdNote}}</div>
-        </li>
-    </ul>
+            <button class="done button large">Back</button>
+        </div>
+    </div>
 
     <hr />
 
