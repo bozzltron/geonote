@@ -1,0 +1,62 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoNote</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+</head>
+
+<body></body>
+
+<template name="note">
+    {{#if display}}
+        <h1>You're Viewing a Geo <i style="font-size:50px" class="fa fa-compass"></i> Note!</h1>
+        <div class="panel"><p>{{text}}</p></div>
+        <p>Posted {{time}}</p>
+    {{else}}
+        <h1>Head {{direction}}</h1>
+        <div class="panel">You are {{distance}} meters from viewing this note.</div>
+        <i style="font-size:50px" class="fa fa-compass"></i>
+    {{/if}}
+</template>
+
+<template name="create">
+
+    <h1>Geo <a href="/"><i class="fa fa-globe"></i></a> Note</h1> 
+    <ul class="slider">
+        <li class="location active">
+            <div id="map"><i class="fa fa-refresh fa-spin"></i> Loading Location</div>
+            <div class="panel">{{lat}}, {{long}}</div>
+            <a href="javascript:;" class="button large show-form">Drop Note Here</a>
+        </li>
+        <li class="form">
+            <form class="new-note">
+                <textarea class="note" type="text" name="text" placeholder="Add a note.  Dropping it here means only people that are standing within 10 meteres from this location can read it."></textarea>
+                <button class="save-note button large">Save Note</button>
+            </form>
+        </li>
+        <li class="share">
+            Share Your Note
+            <div class="panel">http://geonote.meteor.com/note/{{createdNote}}</div>
+        </li>
+    </ul>
+
+    <hr />
+
+    <h3>Notes Nearby</h3> {{#each notes}}   
+    <a href="/note/{{_id}}">Find This Note</a> {{/each}}
+
+</template>
+
+<template name="form">
+    <form class="new-note">
+        <textarea class="note" type="text" name="text" placeholder="Add a note.  Dropping it here means only people that are standing within 10 meteres from this location can read it."></textarea>
+        <button class="save-note button large">Save Note</button>
+    </form>
+</template>
+
+<template name="directions">{{json}}</template>
+

@@ -1,0 +1,37 @@
+/* CSS declarations go here */
+body {
+	text-align:center;
+}
+textarea {
+	height:180px;
+	width:400px;
+	max-width:100%;
+	margin:10px auto 0 auto;
+}
+
+.button{
+	margin-top:10px;
+	width:400px;
+}
+
+#map { height: 180px; }
+
+.slider {
+	position:relative;
+	height:360px;
+	padding:0;
+	margin:0;
+}
+
+.slider li{
+	list-style: none;
+	position: absolute;
+	padding:0;
+	margin:0;
+	display:none;
+	width:100%;
+}
+
+.slider li.active {
+	display:block;
+}
